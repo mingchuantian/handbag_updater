@@ -4,18 +4,142 @@
     <meta charset="utf-8">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
-    <title>{{ title }}</title>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Updater24</title>
+    {% endif %}
+
+
 </head>
 <body>
+    <!---navbar-->
+    <div class="d-flex flex-column bg-white border-bottom shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <!-- Company name-->
+        <a class="navbar-brand" href="#">
+            Updater24
+        </a>
+        <!-- Collapse button-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+          <!---item collapsed-->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                  {% if current_user.is_authenticated %}
+                  <li class="nav-item p2">
+                    <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+                  </li>
+                  <li class="nav-item p2">
+                    <a class="nav-link" href="{{ url_for('logout')}}">Logout</a>
+                  </li>
+                  {% else %}
+                <li class="nav-item p2">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                  </li>
+                  <li class="nav-item p2">
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                  </li>
+                  {% endif %}
+              </ul>
+          </div>
+    </nav>
+</div>
+{% block jumbotron %}
+{% endblock %}
 
     <main role="main" class="container">
-        <div class="col-md-12">
-            {% block main %}
-            {% endblock %}
+        <div class="row">
+
+            <div class="col-md-9 padded-right-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+                {% block body %}
+                {% endblock %}
+
+            </div>
+
+            <div class="col-md-3 top-padding">
+                <div class="my-3 p-3 bg-white rounded shadow-sm">
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+                    <!---updates-->
+                    <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark">2020-6-27 10:37</strong>
+                          Celine medium classic bag in box calfskin now available in U.S.
+                          <a href="#">Store page</a>
+                        </p>
+                      </div>
+                      <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark">2020-6-30 11:37</strong>
+                          Neverfull MM Monogram Canvas now available in Australia.
+                          <a href="#">Store page</a>
+                        </p>  
+                      </div>
+                      <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark">2020-6-27 10:37</strong>
+                          Celine medium classic bag in box calfskin now available in U.S.
+                          <a href="#">Store page</a>
+                        </p>
+                      </div>
+                      <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark">2020-6-27 10:37</strong>
+                          Celine medium classic bag in box calfskin now available in U.S.
+                          <a href="#">Store page</a>
+                        </p>
+                      </div>
+                      <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark">2020-6-27 10:37</strong>
+                          Celine medium classic bag in box calfskin now available in U.S.
+                          <a href="#">Store page</a>
+                        </p>
+                      </div>
+                      <small class="d-block text-right mt-3">
+                        <a href="#">All updates</a>
+                      </small>
+                </div>
+                <!--
+                <div class="content-section">
+                    <h3>Our Sidebar</h3>
+                    <p class='text-muted'>You can put any information here you'd like.
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">Newest Updates</li>
+                        <li class="list-group-item list-group-item-light">Announcements</li>
+                        <li class="list-group-item list-group-item-light">Calendars</li>
+                        <li class="list-group-item list-group-item-light">etc</li>
+                      </ul>
+                    </p>
+                  </div>
+                  -->
+            </div>
+
         </div>
+    <footer class="border-top">
+        footer
+    </footer>
     </main>
-    
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

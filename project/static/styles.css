@@ -1,0 +1,20 @@
+
+body{
+    background-color: #F8F9FA;
+}
+
+.padded-right-container{
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.registerForm{
+    padding-top: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.top-padding{
+    padding-top: 30px
+}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class = "content-section">
+    <!--Set aciton="" so that after post it will remain on this page-->
+
+    <form method="POST" action="">
+        <!--Adding a CSRF token-->
+        {{ form.hidden_tag() }}
+        <fieldset class = "form-group">
+            <div class="form-group ">
+                {{ form.email.label(class="form-control-label") }}
+                {{ form.email(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {{ form.password(class="form-control form-control-lg") }}
+            </div>
+            <div flass="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Don't have an account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
+    </small>
+</div>
+
+{% endblock %}

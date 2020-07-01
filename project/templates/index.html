@@ -1,6 +1,147 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block main %}
-    {{ wtf.quick_form(form)}} 
-{% endblock main%}
+
+{% block body %}
+
+<script>
+    function myFunction() {
+      let box_value = document.getElementById("brand_select").value;
+      if (box_value === "LV") {
+        document.getElementById("lv_options").style.display = "initial"
+        document.getElementById("other_options").style.display = "none"
+      } else {
+        document.getElementById("lv_options").style.display = "none"
+        document.getElementById("other_options").style.display = "initial"
+      }
+    }
+    function radioButton(){
+        let one_product = document.getElementById("email_option-0");
+        let all_products = document.getElementById("email_option-1");
+        if(all_products.checked){
+            document.getElementById("lv-options").style.display = "none"
+            document.getElementById("hermes-options").style.display = "none"
+            document.getElementById("other-options").style.display = "none"
+        }
+        let button_value = document.getElementById("radio-select").value;
+
+
+    }
+    function lv_trigger(){
+        document.getElementById("lv-options").style.display = "initial"
+        document.getElementById("hermes-options").style.display = "none"
+        document.getElementById("other-options").style.display = "none"
+    }
+    function hermes_trigger(){
+        document.getElementById("lv-options").style.display = "none"
+        document.getElementById("hermes-options").style.display = "initial"
+        document.getElementById("other-options").style.display = "none"
+    }
+    function others_trigger(){
+        document.getElementById("lv-options").style.display = "none"
+        document.getElementById("hermes-options").style.display = "none"
+        document.getElementById("other-options").style.display = "initial"       
+    }
+
+
+</script>
+
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-5">Live updater</h1>
+      <p>You will be notified when the product becomes available.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+    </div>
+</div>
+
+<label>
+    <h4>Start subscription</h4>
+</label>
+<p>Via below form you can easily get updates on your selected handbags.</p>
+<hr>
+<label><b>Step1: &nbsp;</b>Select your brand</label>
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-outline-dark btn-block" onclick="lv_trigger()" style="height: 100%;">
+            <img src= "{{ url_for('static', filename = 'lv-logo.png') }}" width="80" >
+        </button>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-outline-dark btn-block" onclick="hermes_trigger()" style="height: 100%;">
+                <img src= "{{ url_for('static', filename = 'hermes-logo.png') }}" width="80" >
+            </button>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-outline-dark btn-block" onclick="others_trigger()" style="height: 100%;">
+                <h5>More</h5>
+            </button>
+        </div>
+</div>
+
+
+<br>
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+        <!--email options-->
+        <div class="form-group" id="" style="display: initial">
+            <b>Step2: &nbsp;</b>
+            {{ form.email_option.label(class="form-control-label") }}
+            {{ form.email_option(id="radio-select")}}
+        </div>
+        <!--LV options-->
+        <div class="form-group" id="lv-options" style="display: initial">
+            <b>Step2: &nbsp;</b>
+            {{ form.lv_options.label(class="form-control-label") }}
+            {{ form.lv_options(class="form-control" )}}
+            <small class="form-text text-muted">Choose your product</small>
+        </div>
+
+        <!--Hermes options-->
+        <div class="form-group" id="hermes-options" style="display: none">
+            <b>Step2: &nbsp;</b>
+            {{ form.hermes_options.label(class="form-control-label") }}
+            {{ form.hermes_options(class="form-control" )}}
+            <small class="form-text text-muted">Choose your product</small>
+        </div>
+        
+
+        <!--Other options-->
+        <div class="form-group" id="other-options" style="display: none">
+            <b>Step2: &nbsp;</b>
+            {{ form.other_options.label(class="form-control-label") }}
+            {{ form.other_options(class="form-control")}}
+            <small class="form-text text-muted">Choose your online store location</small>
+        </div>
+        <div class="form-group">
+            <b>Step3: &nbsp;</b>
+            {{ form.region.label(class="form-control-label") }}
+            {{ form.region(class="form-control")}}
+            <small class="form-text text-muted">Please select your store location</small>
+        </div>
+        <div class="form-group">
+            <b>Step4: &nbsp;</b>
+            {{ form.email.label(class="form-control-label") }}
+            {{ form.email(class="form-control")}}
+            <small class="form-text text-muted">We'll update product availability via email</small>
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+</form>
+
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Notification</h6>
+    <!---updates-->
+    <div class="media text-muted pt-3">
+        <p>update24 is a professional website that offers exceptional update serviece</p>
+    </div>
+
+      <small class="d-block text-right mt-3">
+        <a href="#">All updates</a>
+      </small>
+</div>
+
+
+{% endblock %}
