@@ -5,16 +5,7 @@
 {% block body %}
 
 <script>
-    function myFunction() {
-      let box_value = document.getElementById("brand_select").value;
-      if (box_value === "LV") {
-        document.getElementById("lv_options").style.display = "initial"
-        document.getElementById("other_options").style.display = "none"
-      } else {
-        document.getElementById("lv_options").style.display = "none"
-        document.getElementById("other_options").style.display = "initial"
-      }
-    }
+
     function radioButton(){
         let one_product = document.getElementById("email_option-0");
         let all_products = document.getElementById("email_option-1");
@@ -82,7 +73,7 @@
 <br>
 <form method="POST" action="">
     {{ form.hidden_tag() }}
-
+    {{ form.csrf_token }}
         <!--email options-->
         <div class="form-group" id="" style="display: initial">
             <b>Step2: &nbsp;</b>

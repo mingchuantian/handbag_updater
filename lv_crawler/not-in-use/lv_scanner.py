@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-class url_hunter():
+class lv_scanner():
 
     def __init__(self, link):
         self.link = link
@@ -49,7 +49,7 @@ class url_hunter():
 
 with open('websites.txt', 'r') as websites:
     for website in websites:
-        hunter = url_hunter(website)
+        hunter = lv_scanner(website)
         hunter.run()
         hunter.scroll_buttom()
         hunter.driver.implicitly_wait(5)

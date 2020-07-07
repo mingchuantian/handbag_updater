@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block body %}
+
+<form action="init_db"  method="post">
+    <button type="submit">Init lv product db</button>
+</form>
+
+
+<form action="websites_scan"  method="post">
+    <button type="submit">Scan all skus</button>
+</form>
+
+{{ wtf.quick_form(form) }}
+
+{% endblock%}
